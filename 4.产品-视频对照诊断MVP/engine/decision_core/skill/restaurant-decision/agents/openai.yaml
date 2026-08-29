@@ -1,0 +1,4 @@
+interface:
+  display_name: "导师餐饮经营判断"
+  short_description: "用于餐饮开店、选址、加盟与亏损门店的证据式经营判断"
+  default_prompt: "使用 $restaurant-decision 按证据顺序分析当前餐饮案例，并给出可验证的下一步。"

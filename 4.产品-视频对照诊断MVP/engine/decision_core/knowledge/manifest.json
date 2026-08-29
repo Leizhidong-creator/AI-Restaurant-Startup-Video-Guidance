@@ -1,0 +1,34 @@
+{
+  "knowledge_version": "0.4.0",
+  "schema_version": "2.0",
+  "document_count": 93,
+  "method_count": 52,
+  "case_count": 41,
+  "counts_by_evidence_grade": {
+    "reviewed": 52,
+    "secondary": 16,
+    "golden": 25
+  },
+  "data_file": "platform.jsonl",
+  "embedding_recommendation": {
+    "provider": "Alibaba Cloud Model Studio OpenAI-compatible API",
+    "model": "text-embedding-v4",
+    "dimensions": 1024
+  },
+  "retrieval_policy": {
+    "final_judgment_minimum_grade": "reviewed",
+    "secondary_usage": "Only as a discovery lead or weak analogy; never as decisive evidence.",
+    "golden_definition": "Original video or transcript independently checked with source locators, factual fields, reasoning chain and outcome when available."
+  },
+  "quality_boundary": "Fifty-two method cards are internally reviewed and twenty-five demonstration cases are marked golden (cross-checked against locally stored timestamped Douyin consultation transcripts with source locators). A 2026-07-22 batch extracted from 20 Douyin transcripts (开店品类 001-017, 选址商圈 018-020) added the bulk of these; case numbers are participant-stated and time-anchored but none has a verified follow-up outcome. Sixteen earlier cases remain detailed secondary notes and are excluded from decisive retrieval.",
+  "rights_boundary": "Only short structured summaries and public source links are distributed. Third-party transcripts, audio, video, likeness, voice and unlicensed repository case text are not bundled.",
+  "source_snapshots": {
+    "Fridayxiao/yongge-restaurant-diagnosis-skill": "c19b812",
+    "jiawie3/YongGeSkill": "f8c1d39",
+    "serenakeyitan/yongge-shuocanyin-skill": "3decab2",
+    "Astro-wen/yongge-restaurant-skill": "d824b22",
+    "douyin-consultation-transcripts-2026-07-22": "local srt 开店品类 001-017 + 选址商圈 018-020 (20 videos)"
+  }
+}
+
+

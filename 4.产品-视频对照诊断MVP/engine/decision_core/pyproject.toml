@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "restaurant-handoff"
+version = "0.2.0"
+description = "Evidence-first restaurant decision skill, tool adapters and scoped RAG"
+requires-python = ">=3.10"
+dependencies = []
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["restaurant_handoff*"]
+
+

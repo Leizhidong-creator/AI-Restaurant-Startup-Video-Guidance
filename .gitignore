@@ -1,0 +1,57 @@
+# ===== OS / 编辑器垃圾 =====
+.DS_Store
+**/.DS_Store
+
+# ===== 本地工具 / 临时目录 =====
+.claude/
+.codex-temp/
+.superpowers/
+tmp/
+
+# ===== 打包产物 / 大文件 =====
+*.zip
+*.pdf
+*.mp4
+*.mov
+
+# ===== Python 常见产物 =====
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.worktrees/
+
+# ===== 敏感/本地数据 =====
+# Ignore every environment variant except the checked-in templates.
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+*.age
+*.agekey
+**/age-keys.txt
+**/*secret*
+**/*credential*
+**/*token*
+**/*cookie*
+**/api key/
+**/勇哥声音样本/
+**/检索视频/
+**/uploads/
+**/data/
+
+# ===== 浏览器预览自动产物(非产品)=====
+deploy/
+.playwright-cli/
+
+# ===== R / 运行时数据库 =====
+.Rhistory
+**/.Rhistory
+*.db
+*.sqlite
+*.sqlite3

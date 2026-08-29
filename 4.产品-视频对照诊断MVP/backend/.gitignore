@@ -1,0 +1,25 @@
+# Secrets supplied locally; never commit them.
+api key/
+.env
+.env.*
+!.env.example
+
+# Python
+.venv/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+*.py[cod]
+*.egg-info/
+
+# Runtime data
+data/
+uploads/
+artifacts/
+*.db
+*.sqlite3
+
+# Local worktrees and IDE files
+.worktrees/
+.idea/
+.vscode/
