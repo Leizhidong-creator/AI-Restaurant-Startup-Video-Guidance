@@ -1,7 +1,7 @@
-# 口袋餐谋 / PocketMentor
+# 口袋参谋 / PocketMentor
 
 <p align="center">
-  <img src="docs/assets/readme/pocketmentor-hero.png" alt="口袋餐谋：从爆店案例解构、门店观察到同维诊断和行动验证" width="100%">
+  <img src="docs/assets/readme/pocketmentor-hero.png" alt="口袋参谋：打造短视频中同款的网红店" width="100%">
 </p>
 
 <p align="center">
@@ -11,9 +11,20 @@
   <img alt="Evidence First" src="https://img.shields.io/badge/Decision-Evidence%20First-df4f3f?style=flat-square">
 </p>
 
+<h2 align="center">把餐饮专家装进口袋</h2>
+
 <p align="center">
-  <strong>把餐饮专家装进口袋</strong><br>
-  让刷到的爆店视频不止被看见：解构它为什么成功，对照你自己的门店，再把经验转化为可以执行和验证的改造方案。
+  <strong>让刷到的爆店视频，不止被看见。</strong><br>
+  解构它为什么成功，对照你的真实门店，把别人的爆火经验转化为可执行、可验证、知道何时停止的改造方案。
+</p>
+
+<p align="center">
+  <img src="docs/assets/readme/pocketmentor-motion.svg" alt="爆店短视频经过专家式诊断转化为可验证的门店改造方案" width="760">
+</p>
+
+<p align="center">
+  <img alt="2026 抖音 AI 创变者黑客松联赛武汉大区赛优秀作品" src="https://img.shields.io/badge/2026%20%E6%8A%96%E9%9F%B3%20AI%20%E5%88%9B%E5%8F%98%E8%80%85%E9%BB%91%E5%AE%A2%E6%9D%BE%E8%81%94%E8%B5%9B-%E6%AD%A6%E6%B1%89%E5%A4%A7%E5%8C%BA%E8%B5%9B%E4%BC%98%E7%A7%80%E4%BD%9C%E5%93%81-ef332b?style=for-the-badge&labelColor=17211d">
+  <img alt="游园会人气王" src="https://img.shields.io/badge/%E6%B8%B8%E5%9B%AD%E4%BC%9A-%E4%BA%BA%E6%B0%94%E7%8E%8B-ffc61f?style=for-the-badge&labelColor=007654&color=ffc61f">
 </p>
 
 <p align="center">
@@ -24,13 +35,14 @@
   <a href="#-本地运行">本地运行</a>
 </p>
 
-> 2026 抖音 AI 创变者黑客松武汉大区赛优秀作品。项目由比赛团队共同创作；本公开快照聚焦我负责的 Agent 决策架构、证据链、实时视频诊断、视频缓存与前后端联调工作。
+> **2026 抖音 AI 创变者黑客松联赛 · 武汉大区赛优秀作品｜游园会人气王**<br>
+> 本项目由比赛团队共同创作；我主要负责 Agent 决策架构、证据链、实时视频诊断、视频缓存与前后端整体联调。
 
 ## 🧭 项目摘要
 
 传统餐饮诊断往往依赖专家到店或线上连麦：专业经验稀缺、服务频率低，而且一次建议很难沉淀为可复用的方法。与此同时，短视频平台上有大量爆店案例，却通常停留在“看起来很火”和“照着做也许能成”的层面。
 
-PocketMentor 尝试完成两次转换：一是把专家式的观察、追问、计算和判断流程放进手机，让普通餐饮创业者更容易获得结构化诊断；二是把短视频从一次性内容转化为带成功机制、适用条件、反证和来源定位的案例材料，再与用户门店的真实条件逐维对照。
+PocketMentor 完成两次关键转换：一是把专家式的观察、追问、计算和判断流程放进手机，让普通餐饮创业者也能发起结构化诊断；二是把短视频从一次性内容转化为带成功机制、适用条件、反证和来源定位的案例材料，再与用户门店的真实条件逐维对照。
 
 这里的“手机里的餐饮专家”是一种产品隐喻。系统不冒充具体专家，不替代专业顾问，也不承诺开店或改造一定成功；它做的是降低获得高质量诊断流程的门槛，并让建议可追溯、可验证、可停止。
 
@@ -122,30 +134,50 @@ flowchart LR
 
 ### 1. 案例视频：从文件变成可引用证据
 
+<p align="center">
+  <img src="docs/assets/readme/product-overview.png" alt="口袋参谋移动端案例视频上传页面" width="430">
+</p>
+
 ```mermaid
-flowchart LR
+flowchart TB
     accTitle: 视频与知识处理流水线
-    accDescr: 本地上传或公开链接经过校验、解析、内容哈希和视频理解后，形成带时间点的私有知识与结构化案例，并可按内容复用已有结果
+    accDescr: 视频沿一条自上而下的主链完成接入、理解、入库和案例解构；链接降级与缓存命中作为侧路，不穿越主流程
 
-    input(["本地视频 / 公开链接"]) --> validate["格式、大小与相关性校验"]
-    validate --> resolve["链接解析<br/>主路径 + 降级记录"]
-    resolve --> hash["计算 SHA-256"]
-    hash --> cache{"已有同内容结果？"}
-    cache -->|是| reuse["复用分析<br/>同品类复用解构"]
-    cache -->|否| understand["视频理解<br/>转写 + 时间点观察"]
-    understand --> private_kb["写入用户私有知识"]
-    private_kb --> deconstruct["四维案例解构<br/>差异 + 可迁移条件"]
-    reuse --> deconstruct
-    deconstruct --> diagnosis(["进入实时门店诊断"])
+    subgraph intake ["01 视频接入"]
+        direction LR
+        local_video["本地 MP4 / MOV"] --> validate["格式 · 体积 · 空文件"]
+        public_url["公开视频链接"] --> preview["元数据预览 · 餐饮相关性"]
+        preview --> resolver["主解析器"]
+        resolver -.失败记录.-> fallback["备用解析器"]
+        fallback --> validate
+        resolver --> validate
+    end
 
-    classDef input_style fill:#f8fafc,stroke:#17211d,stroke-width:2px,color:#17211d
-    classDef process fill:#d1fae5,stroke:#0f6f57,stroke-width:2px,color:#064e3b
+    subgraph processing ["02 内容处理"]
+        direction LR
+        validate --> content_hash["SHA-256 内容指纹"]
+        content_hash --> cache_gate{"已有分析？"}
+        cache_gate -->|未命中| video_ai["视频理解<br/>转写 + 时间点观察"]
+        cache_gate -->|命中| cache_reuse["复用分析结果"]
+    end
+
+    subgraph knowledge ["03 证据沉淀"]
+        direction LR
+        video_ai --> private_store["私有知识入库<br/>user_id + store_id"]
+        cache_reuse --> private_store
+        private_store --> case_model["案例解构<br/>机制 · 条件 · 限制"]
+        case_model --> diagnosis_entry(["进入同维诊断"])
+    end
+
+    classDef source fill:#f8fafc,stroke:#17211d,stroke-width:2px,color:#17211d
+    classDef process_style fill:#d1fae5,stroke:#0f6f57,stroke-width:2px,color:#064e3b
     classDef decision fill:#fef3c7,stroke:#a16207,stroke-width:2px,color:#451a03
-    classDef output fill:#fee2e2,stroke:#df4f3f,stroke-width:2px,color:#7f1d1d
+    classDef exception fill:#fee2e2,stroke:#df4f3f,stroke-width:2px,color:#7f1d1d
 
-    class input,diagnosis input_style
-    class validate,resolve,hash,reuse,understand,private_kb,deconstruct process
-    class cache decision
+    class local_video,public_url,diagnosis_entry source
+    class validate,preview,resolver,content_hash,video_ai,cache_reuse,private_store,case_model process_style
+    class cache_gate decision
+    class fallback exception
 ```
 
 实现中的关键边界：
@@ -161,51 +193,110 @@ flowchart LR
 
 前端通过浏览器媒体能力建立实时会话。Agent 不要求用户一次拍完固定清单，而是根据当前最大证据缺口，每轮只发出一个拍摄动作。例如：先退后看正面门头，再转向左右和对面，随后补入口路线、停车或外卖动线。作品集记录的约 `2 FPS` 是在现场观察效果与传输成本之间采用的开发策略。
 
-<p align="center">
-  <img src="docs/assets/readme/product-overview.png" alt="口袋餐谋移动端案例视频上传页面" width="430">
-</p>
-
 ```mermaid
-sequenceDiagram
-    accTitle: 实时视频诊断交互顺序
-    accDescr: 用户通过 H5 与实时模型连麦，后端 Skill 选择下一证据动作，确定性工具返回可追溯结果，证据充分后再生成并校验报告
+flowchart TB
+    accTitle: 实时视频诊断技术链路
+    accDescr: 一轮实时诊断沿单向主链处理现场媒体、模型交互、服务端动作和证据校验；补证结果进入下一轮，图中不使用跨层回线
 
-    participant user as 用户
-    participant h5 as H5 / WebRTC
-    participant realtime as Qwen Realtime
-    participant runtime as Backend + Skill
-    participant tools as 确定性工具
-    participant report as 报告校验器
-
-    user->>h5: 建档并开始视频连麦
-    h5->>runtime: 创建诊断会话
-    runtime-->>realtime: 会话指令、工具契约与证据缺口
-
-    loop 每轮只做一个高价值动作
-        realtime-->>user: 追问一项或引导一个镜头
-        user->>h5: 回答或提供现场画面
-        h5->>runtime: 保存事件与观察
-        runtime->>runtime: 更新事实、反证和缺口
-        opt 参数齐全且需要外部事实
-            runtime->>tools: 经营计算 / 地图 / RAG / 当前信息
-            tools-->>runtime: 类型化结果 + evidence ID
-        end
+    subgraph client_row ["01 现场采集"]
+        direction LR
+        user(["用户 + 真实门店"]) --> h5["移动端 H5"] --> media["WebRTC 音视频<br/>约 2 FPS 视频策略"]
     end
 
-    alt 证据达到阶段门槛
-        runtime->>report: 候选结论 + 当前会话证据
-        report->>report: 删除未知引用并校验允许结论
-        report-->>h5: 结论、第一动作、验证与停止条件
-    else 关键证据或工具缺失
-        runtime-->>h5: insufficient_evidence + 低风险补证动作
+    subgraph interaction_row ["02 实时理解"]
+        direction LR
+        realtime["Qwen Realtime<br/>语音交互 + 画面理解"] --> event_store["会话事件<br/>回答 + 时间点观察"]
     end
+
+    subgraph decision_row ["03 服务端决策"]
+        direction LR
+        skill_runtime["Skill Runtime<br/>阶段 + 缺口 + 安全门槛"] --> action_router{"本轮动作"}
+        action_router -->|追问 / 拍摄| direct_evidence["reported_fact<br/>observed_fact"]
+        action_router -->|调用工具| tools["计算 · 地图 · 双知识库"]
+        tools --> typed_result["tool_fact<br/>状态 + evidence ID"]
+    end
+
+    subgraph evidence_row ["04 证据与输出"]
+        direction LR
+        evidence_ledger["Evidence Runtime<br/>支持 + 反证 + 缺口"] --> evidence_gate{"达到门槛？"}
+        evidence_gate -->|是| report_guard["报告校验器"] --> final_report(["结论 · 行动<br/>验证 · 停止条件"])
+        evidence_gate -->|否| supplement(["下一轮补证"])
+    end
+
+    media --> realtime
+    event_store --> skill_runtime
+    direct_evidence --> evidence_ledger
+    typed_result --> evidence_ledger
+
+    classDef client_style fill:#f8fafc,stroke:#17211d,stroke-width:2px,color:#17211d
+    classDef model_style fill:#fef3c7,stroke:#a16207,stroke-width:2px,color:#451a03
+    classDef runtime_style fill:#d1fae5,stroke:#0f6f57,stroke-width:2px,color:#064e3b
+    classDef guard_style fill:#fee2e2,stroke:#df4f3f,stroke-width:2px,color:#7f1d1d
+
+    class user,h5,media client_style
+    class realtime model_style
+    class event_store,skill_runtime,action_router,evidence_ledger,tools,typed_result,direct_evidence runtime_style
+    class evidence_gate,report_guard,supplement,final_report guard_style
 ```
 
 模型负责自然交互，服务端负责事实边界。经营计算、地图检索、平台/私有 RAG 等关键工具不会依赖模型“自由发挥”调用结果；服务端根据参数完备性确定性执行，并把 `no_hit`、`unavailable` 和 `invalid_result` 分开记录。
 
 ## 📚 平台知识与用户私有知识
 
-平台知识库与用户知识库是两条不同的信任域：
+平台知识库与用户知识库是两条不同的信任域。它们都通过检索 Port 接入 Skill，但数据来源、过滤条件和可见范围不同：
+
+```mermaid
+flowchart TB
+    accTitle: 双知识库检索架构
+    accDescr: 一次查询在入口处分流到平台知识或用户私有知识，两条路径分别过滤并检索，最终统一返回带来源的证据
+
+    query(["Skill 发起检索<br/>query + stage + category"]) --> scope_router{"选择知识域"}
+
+    subgraph platform_domain ["平台知识域"]
+        direction TB
+        platform_data["方法卡 + 案例<br/>SQLAlchemy Async / SQLite"] --> grade_filter["reviewed / golden<br/>阶段 · 品类 · 地区过滤"]
+        grade_filter --> platform_search["安全词法排序"]
+        platform_search --> platform_port["Platform Retrieval Port"]
+    end
+
+    subgraph private_domain ["用户私有域"]
+        direction TB
+        private_data["视频观察 + 门店档案<br/>SQLAlchemy Async / SQLite"] --> tenant_guard["user_id + store_id<br/>所有权校验"]
+        tenant_guard --> private_search["数据库词法排序"]
+        private_search --> private_port["Private Retrieval Port"]
+    end
+
+    subgraph runtime ["证据消费"]
+        direction LR
+        retrieval_result["类型化命中<br/>内容 + 来源 + evidence ID"] --> evidence_runtime["Evidence Runtime"]
+        evidence_runtime --> decision_skill(["Skill 判断或继续补证"])
+    end
+
+    scope_router -->|行业方法| platform_data
+    scope_router -->|本店材料| private_data
+    platform_port --> retrieval_result
+    private_port --> retrieval_result
+
+    classDef source fill:#f8fafc,stroke:#17211d,stroke-width:2px,color:#17211d
+    classDef platform_style fill:#fef3c7,stroke:#a16207,stroke-width:2px,color:#451a03
+    classDef private_style fill:#d1fae5,stroke:#0f6f57,stroke-width:2px,color:#064e3b
+    classDef boundary fill:#fee2e2,stroke:#df4f3f,stroke-width:2px,color:#7f1d1d
+
+    class query,scope_router source
+    class platform_data,grade_filter,platform_search,platform_port platform_style
+    class private_data,tenant_guard,private_search,private_port private_style
+    class retrieval_result,evidence_runtime,decision_skill boundary
+```
+
+### 当前到底用了什么
+
+| 层面 | 仓库中的默认实现 | 为什么这样设计 |
+| --- | --- | --- |
+| 持久化 | `SQLAlchemy Async` + `SQLite` + `aiosqlite` | 适合比赛交付和本地运行，并让数据访问层保持异步 |
+| 平台检索 | 先保留 `reviewed/golden`，再按阶段、品类、地区过滤，最后做安全词法与中文双字组合排序 | 在没有向量服务时仍能离线运行，且不会让低等级材料进入决定性结论 |
+| 私有检索 | 校验门店确实属于当前 `user_id`，再限定 `store_id` 做数据库词法排序 | 防止用户资料跨门店、跨用户进入上下文 |
+| RAG 接口 | 平台和私有知识各有独立 Retrieval Port，返回类型化命中与稳定 evidence ID | 当前可运行词法检索，未来可替换为向量召回而不改 Skill 合同 |
+| 生产路线 | `PostgreSQL/pgvector + Embedding + metadata filter + reranking` | 属于部署升级建议，不是仓库当前默认能力 |
 
 | 维度 | 平台知识 | 用户私有知识 |
 | --- | --- | --- |
@@ -213,63 +304,73 @@ sequenceDiagram
 | 当前规模 | 93 条：52 张方法卡 + 41 个案例 | 随用户与门店产生，不做公共汇总 |
 | 检索范围 | 按阶段、主题和证据等级过滤 | 必须同时匹配已认证 `user_id` 与 `store_id` |
 | 证据标识 | `rag:platform:<knowledge_id>:<version>` | 与具体用户、门店、视频和片段绑定 |
-| 公开边界 | 仅分发短摘要和公开来源链接 | 不进入其他用户的检索上下文 |
+| 内容边界 | 仅分发短摘要和来源链接 | 不进入其他用户的检索上下文 |
 
 ### 证据等级不是装饰标签
 
-当前 manifest 中的 93 条记录由 `52 reviewed`、`25 golden` 和 `16 secondary` 组成：
+当前 manifest 中有 93 条可治理的结构化知识记录，其中包括 52 张方法卡和 41 个案例；按证据等级统计为 `52 reviewed`、`25 golden` 和 `16 secondary`：
 
 - `golden`：原始视频或转写经过独立核对，保留来源定位、事实字段、推理链和可获得的结果信息。
 - `reviewed`：方法卡或案例已做内部复核，可以进入最终判断。
 - `secondary`：只用于发现线索或弱类比，不能作为决定性证据。
 
-这些数字描述的是知识治理状态，不代表诊断准确率。现有案例中的部分经营数字来自参与者口述且带时间定位，但没有经过后续经营结果验证；README 和运行时都保留这一限制。
+这 93 条并不是 93 篇原始文档的简单堆叠，而是已经拆出类型、适用阶段、品类、地区、限制、来源定位和证据等级的检索单元。这个数字描述的是知识治理状态，不代表诊断准确率。现有案例中的部分经营数字来自参与者口述且带时间定位，但没有经过后续经营结果验证；README 和运行时都保留这一限制。
 
-公开版本默认提供安全的词法检索 fallback，并通过 Port 保留替换能力。向量检索、元数据过滤和 reranking 是生产部署建议，不应被误写成当前公开快照的默认路径。
+因此，准确说法是：本项目已经具备平台知识与私有知识的 RAG 接口、检索工具和证据消费链，但默认检索器是可离线运行的数据库词法实现，并不是完整的向量 RAG。向量召回、元数据过滤和 reranking 是生产部署建议。
 
 ## 🧰 Skill 如何驱动一次判断
 
 餐饮问题首先被识别为四个阶段之一：`planned_opening`、`site_selection`、`franchise` 或 `operating_loss`。不同阶段拥有不同的必要事实、关键工具和允许结论，避免用一套模板回答所有经营问题。
 
 ```mermaid
-stateDiagram-v2
+flowchart TB
     accTitle: Skill 与证据运行时状态流
-    accDescr: 一次诊断从阶段识别和不可逆风险检查开始，在追问、拍摄与工具调用之间循环，只有证据达到门槛并通过校验后才能输出经营判断
+    accDescr: 一轮诊断从阶段识别走向动作选择，三类动作分别生成三类事实，再汇入证据账本和判断门槛；需要补证时从单独出口进入下一轮
 
-    [*] --> Stage: 识别经营阶段
-    state "阶段识别" as Stage
-    state "不可逆风险门槛" as SafetyGate
-    state "选择最高价值动作" as NextAction
-    state "追问一个事实" as Ask
-    state "请求一次现场拍摄" as Capture
-    state "调用确定性工具" as ToolCall
-    state "更新证据账本" as EvidenceLedger
-    state "证据门槛检查" as EvidenceGate
-    state "证据不足" as Insufficient
-    state "判断校验" as ValidateJudgment
-    state "结构化结论" as FinalJudgment
+    subgraph gates ["01 识别与安全门槛"]
+        direction LR
+        start(["开始诊断"]) --> stage["识别经营阶段"]
+        stage --> safety["检查付款 · 签字 · 现金风险"]
+        safety --> choose{"选择最高价值动作"}
+    end
 
-    Stage --> SafetyGate: 加载阶段规则
-    SafetyGate --> Ask: 缺少付款、签字或现金风险事实
-    SafetyGate --> NextAction: 安全事实已知
+    subgraph actions ["02 并列证据动作：每轮只执行一个"]
+        direction LR
+        ask["ask<br/>→ reported_fact"]
+        capture["request_capture<br/>→ observed_fact"]
+        call_tool["call_tool<br/>→ tool_fact / 故障"]
+    end
 
-    NextAction --> Ask: ask / plan_question
-    NextAction --> Capture: request_capture
-    NextAction --> ToolCall: call_tool
+    choose --> ask
+    choose --> capture
+    choose --> call_tool
 
-    Ask --> EvidenceLedger: 记录 reported_fact
-    Capture --> EvidenceLedger: 记录 observed_fact
-    ToolCall --> EvidenceLedger: 记录 tool_fact 或故障状态
-    EvidenceLedger --> EvidenceGate: 更新支持、反证和缺口
+    ask --> ledger["Evidence Runtime<br/>支持 · 反证 · 缺口"]
+    capture --> ledger
+    call_tool --> ledger
+    ledger --> gate{"达到判断门槛？"}
 
-    EvidenceGate --> NextAction: 仍有可补证动作
-    EvidenceGate --> Insufficient: 关键工具不可用或证据无效
-    EvidenceGate --> ValidateJudgment: ready_for_judgment
-    ValidateJudgment --> NextAction: 引用或结论不合法
-    ValidateJudgment --> FinalJudgment: 校验通过
+    subgraph outcomes ["04 门槛结果"]
+        direction LR
+        next_round(["继续收集<br/>进入下一轮"])
+        insufficient(["insufficient_evidence<br/>低风险补证动作"])
+        validate["校验候选判断<br/>引用 · 强度 · 允许结论"]
+        output(["结构化结论<br/>行动 · 验证 · 停止条件"])
+        validate -->|通过| output
+    end
 
-    Insufficient --> [*]: 返回低风险补证动作
-    FinalJudgment --> [*]: 输出行动与边界
+    gate -->|仍可补证| next_round
+    gate -->|关键证据缺失| insufficient
+    gate -->|ready_for_judgment| validate
+
+    classDef process_style fill:#d1fae5,stroke:#0f6f57,stroke-width:2px,color:#064e3b
+    classDef action_style fill:#fef3c7,stroke:#a16207,stroke-width:2px,color:#451a03
+    classDef evidence_style fill:#f8fafc,stroke:#17211d,stroke-width:2px,color:#17211d
+    classDef guard_style fill:#fee2e2,stroke:#df4f3f,stroke-width:2px,color:#7f1d1d
+
+    class start,stage,safety,choose,ledger process_style
+    class ask,capture,call_tool action_style
+    class gate,validate,insufficient,next_round,output guard_style
 ```
 
 ### Evidence Runtime 的四类事实
@@ -295,7 +396,7 @@ stateDiagram-v2
 | 实时模型工具调用不稳定 | 经营计算和权限边界必须留在服务端 | 参数满足后确定性注入工具，使用类型化输入输出并记录运行轨迹 | 失败状态可解释、可恢复；第三方服务不可用时必须降低结论强度 |
 | 重复分析视频成本高 | 内容相同就不应重复理解，解构复用还要考虑品类 | SHA-256 分析缓存；同内容、同品类复用案例解构 | 开发缓存命中观察约 5.8 ms；不是生产性能承诺，缓存也不能跨品类滥用 |
 | 大视频无法直接进入模型 | 上传介质与业务证据应解耦 | 小视频直传；大视频走临时资源，再把分析结果结构化入库 | 开发临时资源 48 小时有效；生产需持久对象存储与生命周期治理 |
-| 通用检索可能越权或混淆来源 | 平台经验和用户数据必须是不同信任域 | 平台/私有 RAG 分离；私有检索校验 `user_id` 与 `store_id`；报告限制为当前会话证据 | 防止跨用户降级检索；公开 fallback 仍是词法检索，生产向量检索需另行接入 |
+| 通用检索可能越权或混淆来源 | 平台经验和用户数据必须是不同信任域 | 平台/私有 RAG 分离；私有检索校验 `user_id` 与 `store_id`；报告限制为当前会话证据 | 防止跨用户降级检索；当前 fallback 仍是词法检索，生产向量检索需另行接入 |
 
 ## 🌱 科技平权与短视频的二次价值
 
@@ -308,18 +409,18 @@ stateDiagram-v2
 
 这使短视频形成一条新的使用链：**内容消费 → 案例结构化 → 个体门店诊断 → 低成本试验 → 结果复盘**。平台内容不只是获得观看和互动，还可以成为普通经营者理解行业规律、识别自身差距和降低试错成本的公共入口。
 
-## ✅ 工程评估
+## ✅ 工程评估：142 项测试到底验证什么
 
-公开快照的自动化测试分为三层，共 142 项。它们验证的是软件合同、权限、状态流和跨层集成，不代表餐饮诊断准确率或经营成功率。
+142 项自动化测试不是一个用来证明“AI 很准”的宣传数字，而是三层工程防线。它们分别验证决策规则不会越界、后端数据不会串域，以及端到端链路在失败时仍能给出可解释状态。
 
-| 测试层 | 数量 | 主要覆盖 |
-| --- | ---: | --- |
-| Decision Core | 51 | 安全门槛、阶段事实、下一动作、工具失败、检索等级、证据校验和运行时轨迹 |
-| Backend | 77 | API、用户/门店作用域、视频上传与缓存、知识入库、诊断报告、实时配置和工具注册 |
-| Integration | 14 | 决策内核与后端合同、离线复现、案例流程与错误路径 |
-| **合计** | **142** | 脱敏公开快照的工程回归保障 |
+| 防线 | 数量 | 守住的产品链路 | 典型失效风险 |
+| --- | ---: | --- | --- |
+| Decision Core | 51 | 阶段识别 → 下一动作 → 证据门槛 → 判断校验 | 缺证据强行判断、低等级知识进入强结论、工具失败被当成有效结果 |
+| Backend | 77 | 视频接入 → 缓存 → 私有知识 → 实时会话 → 报告 | 跨用户检索、重复视频反复分析、API 状态漂移、未知 evidence ID 混入报告 |
+| Integration | 14 | 决策内核 ↔ FastAPI ↔ 工具与案例链路 | 跨层合同不一致、离线无法复现、异常路径没有降级结果 |
+| **合计** | **142** | 从输入、检索、决策到输出的工程回归保障 | **不等于餐饮诊断准确率，也不等于经营成功率** |
 
-更进一步的产品评估需要真实用户研究：建议采纳率、关键事实补全率、专家一致性、改造前后经营指标和误导性建议率都不应被现有工程测试替代。
+真正的产品效果仍需要真实用户研究来评估，包括建议采纳率、关键事实补全率、专家一致性、改造前后经营指标和误导性建议率；这些指标不能由现有工程测试替代。
 
 ## ⚠️ 适用边界与责任使用
 
@@ -329,7 +430,7 @@ stateDiagram-v2
 - 视频中的排队、满座或热闹只代表拍摄时点，也可能受高峰、活动或内容编排影响。
 - 证据不足、关键工具不可用或结果无效时，只允许输出低风险补证动作与 `insufficient_evidence`。
 - 实时视频依赖浏览器摄像头/麦克风权限和网络质量；约 2 FPS 是开发策略，不是所有设备的固定表现。
-- 公开仓库只包含结构化摘要和来源链接，不分发第三方原始视频、音频、转写、肖像或声音。使用者仍需自行核实内容授权。
+- 本仓库只包含结构化摘要和来源链接，不分发第三方原始视频、音频、转写、肖像或声音。使用者仍需自行核实内容授权。
 
 ## 🚀 本地运行
 
@@ -402,6 +503,6 @@ python -m pytest "4.产品-视频对照诊断MVP/integration/tests" -q
 - 如果凭据曾进入 Git 历史，仅删除当前文件不够：应立即撤销和轮换凭据，再清理历史、构建缓存和部署环境。
 - 详细披露流程见 [SECURITY.md](SECURITY.md)。
 
-## 📄 公开快照与内容授权
+## 📄 内容授权
 
-这是比赛共创项目经过脱敏后的公开代码快照。代码、文档、知识条目和媒体素材可能具有不同的著作权或授权条件；发布或再利用前，请确认所有贡献者同意，并分别核实第三方内容的许可。本仓库不对未明确授权的第三方视频、音频、肖像、声音或文本授予额外权利。
+本项目由比赛团队共同创作，并已移除仓库中的真实凭据与不适合分发的原始材料。代码、文档、知识条目和媒体素材可能具有不同的著作权或授权条件；发布或再利用前，请确认所有贡献者同意，并分别核实第三方内容的许可。本仓库不对未明确授权的第三方视频、音频、肖像、声音或文本授予额外权利。

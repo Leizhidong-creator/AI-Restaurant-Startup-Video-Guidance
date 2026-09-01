@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="112" viewBox="0 0 960 112" role="img" aria-labelledby="title desc">
+  <title id="title">口袋参谋产品价值动效</title>
+  <desc id="desc">短视频经过专家式诊断，转化为可以验证的门店改造方案。</desc>
+  <rect x="1" y="1" width="958" height="110" fill="#faf8f3" stroke="#17211d" stroke-width="2"/>
+  <g font-family="Noto Sans SC, Microsoft YaHei, sans-serif" font-weight="700" font-size="22" text-anchor="middle">
+    <rect x="48" y="29" width="218" height="54" fill="#ffc61f" stroke="#17211d" stroke-width="2"/>
+    <text x="157" y="64" fill="#17211d">爆店短视频</text>
+    <rect x="371" y="29" width="218" height="54" fill="#007654" stroke="#17211d" stroke-width="2"/>
+    <text x="480" y="64" fill="#ffffff">专家式诊断</text>
+    <rect x="694" y="29" width="218" height="54" fill="#ffffff" stroke="#17211d" stroke-width="2"/>
+    <text x="803" y="64" fill="#17211d">改造与验证</text>
+  </g>
+  <path d="M 278 56 H 352" stroke="#17211d" stroke-width="3" fill="none"/>
+  <path d="M 341 48 L 353 56 L 341 64" stroke="#17211d" stroke-width="3" fill="none"/>
+  <path d="M 601 56 H 675" stroke="#17211d" stroke-width="3" fill="none"/>
+  <path d="M 664 48 L 676 56 L 664 64" stroke="#17211d" stroke-width="3" fill="none"/>
+  <circle r="7" fill="#ef332b">
+    <animateMotion dur="1.5s" repeatCount="indefinite" path="M 278 56 H 352"/>
+  </circle>
+  <circle r="7" fill="#ef332b">
+    <animateMotion begin="0.75s" dur="1.5s" repeatCount="indefinite" path="M 601 56 H 675"/>
+  </circle>
+</svg>
