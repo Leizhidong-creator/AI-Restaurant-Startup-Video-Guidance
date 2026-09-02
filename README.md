@@ -1,11 +1,7 @@
 # 口袋参谋 / PocketMentor
 
 <p align="center">
-  <img src="docs/assets/readme/university-logos/university-collab.png" alt="太原理工大学 × 上海交通大学 × 浙江大学，三校联合创作口袋参谋" width="860">
-</p>
-
-<p align="center">
-  <sub>Logo 来源：<a href="https://www.tyut.edu.cn/">太原理工大学</a> · <a href="https://www.sjtu.edu.cn/">上海交通大学</a> · <a href="https://www.zju.edu.cn/">浙江大学</a></sub>
+  <img src="docs/assets/readme/university-logos/university-collab.png" alt="太原理工大学、上海交通大学、浙江大学 Logo" width="860">
 </p>
 
 <p align="center">
