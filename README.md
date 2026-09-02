@@ -1,5 +1,25 @@
 # 口袋参谋 / PocketMentor
 
+<table align="center" role="presentation" width="100%" style="max-width:860px" cellpadding="0" cellspacing="0">
+    <tr>
+      <td align="center" bgcolor="#17211d" style="padding:24px 30px 10px;border-radius:16px 16px 0 0">
+        <div style="font:600 12px/1.2 Segoe UI,Microsoft YaHei,sans-serif;letter-spacing:3px;color:#b8c8c1;margin-bottom:18px">COLLABORATIVE BUILD</div>
+        <img src="docs/assets/readme/university-logos/tyut-logo.png" alt="太原理工大学" width="190" style="width:22%;height:auto;vertical-align:middle;margin:0 1%">
+        <span style="font:700 30px/1 Segoe UI,sans-serif;color:#ffc61f;vertical-align:middle">×</span>
+        <img src="docs/assets/readme/university-logos/sjtu-logo-white.png" alt="上海交通大学" width="175" style="width:20%;height:auto;vertical-align:middle;margin:0 1%">
+        <span style="font:700 30px/1 Segoe UI,sans-serif;color:#ffc61f;vertical-align:middle">×</span>
+        <img src="docs/assets/readme/university-logos/zju-logo.svg" alt="浙江大学" width="190" style="width:22%;height:auto;vertical-align:middle;margin:0 1%">
+      </td>
+    </tr>
+    <tr>
+      <td align="center" bgcolor="#17211d" style="padding:8px 30px 20px;border-radius:0 0 16px 16px;font:600 16px/1.4 Segoe UI,Microsoft YaHei,sans-serif;letter-spacing:2px;color:#f6f7f4">三校联合创作 · 口袋参谋</td>
+    </tr>
+</table>
+
+<p align="center">
+  <sub>Logo 来源：<a href="https://www.tyut.edu.cn/">太原理工大学</a> · <a href="https://www.sjtu.edu.cn/">上海交通大学</a> · <a href="https://www.zju.edu.cn/">浙江大学</a></sub>
+</p>
+
 <p align="center">
   <img src="docs/assets/readme/pocketmentor-hero.png" alt="口袋参谋：打造短视频中同款的网红店" width="100%">
 </p>
@@ -288,7 +308,7 @@ flowchart TB
     class retrieval_result,evidence_runtime,decision_skill boundary
 ```
 
-### 当前到底用了什么
+### 项目设计
 
 | 层面 | 仓库中的默认实现 | 为什么这样设计 |
 | --- | --- | --- |
@@ -408,19 +428,6 @@ flowchart TB
 4. **判断可验证性**：建议必须绑定证据、第一动作、验证条件和停止条件，让创业者知道何时继续，也知道何时该停。
 
 这使短视频形成一条新的使用链：**内容消费 → 案例结构化 → 个体门店诊断 → 低成本试验 → 结果复盘**。平台内容不只是获得观看和互动，还可以成为普通经营者理解行业规律、识别自身差距和降低试错成本的公共入口。
-
-## ✅ 工程评估：142 项测试到底验证什么
-
-142 项自动化测试不是一个用来证明“AI 很准”的宣传数字，而是三层工程防线。它们分别验证决策规则不会越界、后端数据不会串域，以及端到端链路在失败时仍能给出可解释状态。
-
-| 防线 | 数量 | 守住的产品链路 | 典型失效风险 |
-| --- | ---: | --- | --- |
-| Decision Core | 51 | 阶段识别 → 下一动作 → 证据门槛 → 判断校验 | 缺证据强行判断、低等级知识进入强结论、工具失败被当成有效结果 |
-| Backend | 77 | 视频接入 → 缓存 → 私有知识 → 实时会话 → 报告 | 跨用户检索、重复视频反复分析、API 状态漂移、未知 evidence ID 混入报告 |
-| Integration | 14 | 决策内核 ↔ FastAPI ↔ 工具与案例链路 | 跨层合同不一致、离线无法复现、异常路径没有降级结果 |
-| **合计** | **142** | 从输入、检索、决策到输出的工程回归保障 | **不等于餐饮诊断准确率，也不等于经营成功率** |
-
-真正的产品效果仍需要真实用户研究来评估，包括建议采纳率、关键事实补全率、专家一致性、改造前后经营指标和误导性建议率；这些指标不能由现有工程测试替代。
 
 ## ⚠️ 适用边界与责任使用
 
