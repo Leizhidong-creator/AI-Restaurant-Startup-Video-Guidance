@@ -2,7 +2,14 @@
 
 ## Objective
 
-Redesign the public README for 口袋餐谋 / PocketMentor as a branded product narrative, technical dossier, and reproducible project guide. The README must explain the product deeply enough that a reader understands the user problem, the end-to-end product loop, the knowledge and evidence model, the real-time video path, the author's engineering contributions, the project's social value, and its limitations.
+Redesign the public README for 口袋参谋 / PocketMentor as a branded product narrative, technical dossier, and reproducible project guide. The README must explain the product deeply enough that a reader understands the user problem, the end-to-end product loop, the knowledge and evidence model, the real-time video path, the author's engineering contributions, the project's social value, and its limitations.
+
+## Final Scope Addendum (2026-09-02)
+
+- Remove the entire `工程评估` section and its 142-test table from the README. Test commands remain in local setup for reproducibility.
+- Rename `当前到底用了什么` to `项目设计`. Keep the existing explanations of SQLite, lexical retrieval, RAG, and Retrieval Port; do not rewrite those concepts for a general audience in the README.
+- Add an official-logo collaboration masthead above the hero: 太原理工大学 × 上海交通大学 × 浙江大学, followed by `三校联合创作`.
+- Use only official public logo assets sourced from each university's official website, with source URLs recorded in the README asset notes.
 
 ## Central Narrative
 
