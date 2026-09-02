@@ -1,20 +1,8 @@
 # 口袋参谋 / PocketMentor
 
-<table align="center" role="presentation" width="100%" style="max-width:860px" cellpadding="0" cellspacing="0">
-    <tr>
-      <td align="center" bgcolor="#17211d" style="padding:24px 30px 10px;border-radius:16px 16px 0 0">
-        <div style="font:600 12px/1.2 Segoe UI,Microsoft YaHei,sans-serif;letter-spacing:3px;color:#b8c8c1;margin-bottom:18px">COLLABORATIVE BUILD</div>
-        <img src="docs/assets/readme/university-logos/tyut-logo.png" alt="太原理工大学" width="190" style="width:22%;height:auto;vertical-align:middle;margin:0 1%">
-        <span style="font:700 30px/1 Segoe UI,sans-serif;color:#ffc61f;vertical-align:middle">×</span>
-        <img src="docs/assets/readme/university-logos/sjtu-logo-white.png" alt="上海交通大学" width="175" style="width:20%;height:auto;vertical-align:middle;margin:0 1%">
-        <span style="font:700 30px/1 Segoe UI,sans-serif;color:#ffc61f;vertical-align:middle">×</span>
-        <img src="docs/assets/readme/university-logos/zju-logo.svg" alt="浙江大学" width="190" style="width:22%;height:auto;vertical-align:middle;margin:0 1%">
-      </td>
-    </tr>
-    <tr>
-      <td align="center" bgcolor="#17211d" style="padding:8px 30px 20px;border-radius:0 0 16px 16px;font:600 16px/1.4 Segoe UI,Microsoft YaHei,sans-serif;letter-spacing:2px;color:#f6f7f4">三校联合创作 · 口袋参谋</td>
-    </tr>
-</table>
+<p align="center">
+  <img src="docs/assets/readme/university-logos/university-collab.png" alt="太原理工大学 × 上海交通大学 × 浙江大学，三校联合创作口袋参谋" width="860">
+</p>
 
 <p align="center">
   <sub>Logo 来源：<a href="https://www.tyut.edu.cn/">太原理工大学</a> · <a href="https://www.sjtu.edu.cn/">上海交通大学</a> · <a href="https://www.zju.edu.cn/">浙江大学</a></sub>
